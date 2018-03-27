@@ -19,7 +19,7 @@ function processSearchQuery(message) {
         if (item === null) {
             browser.local.storage.set(JSON.parse(`searchQueries:[$message]`));
         } else {
-
+            
         }
     }, function (error) {
 
