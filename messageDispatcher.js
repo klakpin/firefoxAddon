@@ -19,7 +19,9 @@ function processSearchQuery(message) {
         if (item === null) {
             browser.local.storage.set(JSON.parse(`searchQueries:[$message]`));
         } else {
-            
+            item.push(message);
+            browser.local.storage.set(item);
+
         }
     }, function (error) {
 
