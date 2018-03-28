@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "InnoMetrics",
+  "description": "Metrics",
+  "version": "1.0",
+  "homepage_url": "https://github.com/klakpin/firefoxAddon",
+  "icons": {
+    "48": "icons/page-48.png"
+  },
+
+  "applications": {
+    "gecko": {
+      "strict_min_version": "54.0a1"
+    }
+
+  },
+  "browser_action": {
+    "default_icon": "icons/page-32.png"
+  },
+
+  "background": {
+    "scripts": ["messageDispatcher.js"]
+  },
+
+  "content_scripts": [
+    {
+      "js": [
+        "googleSearchHandler.js"
+      ],
+      "matches": [
+        "*://*.google.ru/*"
+      ]
+    }
+  ],
+
+  "permissions": [
+    "storage"
+  ]
+}

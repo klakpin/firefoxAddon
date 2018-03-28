@@ -1,10 +1,20 @@
+browser.browserAction.onClicked.addListener(openMyPage);
+
 browser.runtime.onMessage.addListener(onMessage);
 
-function onMessage(message) {
+function openMyPage() {
+    browser.tabs.create({
+        "url": "/innoMetricsIndex.html"
+    });
+}
 
+
+function onMessage(message) {
+    console.log("New message: " + message.type);
     switch (message.type) {
         case "searchQuery":
             processSearchQuery(message);
+            break;
     }
 }
 
@@ -13,17 +23,26 @@ function onMessage(message) {
  * @param message - information about search query
  */
 function processSearchQuery(message) {
-
+    delete message.type;
     let queries = browser.storage.local.get("searchQueries");
-    queries.then(function (item) {
-        if (item === null) {
-            browser.local.storage.set(JSON.parse(`searchQueries:[$message]`));
-        } else {
-            item.push(message);
-            browser.local.storage.set(item);
 
+    queries.then(function (items) {
+            let searchQueries = items.searchQueries;
+            if (searchQueries === undefined) {
+                searchQueries = [];
+            }
+            searchQueries.push(message);
+
+            let dbRecord = {
+                "searchQueries": searchQueries
+            };
+
+            browser.storage.local.set(dbRecord).catch(function (error) {
+                console.log("Error while setting local storage data, " + error);
+            });
         }
-    }, function (error) {
-
-    })
+        , function (error) {
+            console.log("Error while getting local storage data (searchQueries), " + error);
+        })
 }
+

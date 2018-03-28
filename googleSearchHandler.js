@@ -2,11 +2,13 @@
  * Reads value of search query and send it to background script.
  */
 
-let currentHref = window.location.href;
-let hrefParams = currentHref.searchParams;
+console.log("Hi");
+
+let hrefParams = (new URL(document.location)).searchParams;
 
 // Search page is new, i.e. user did not went to page 2 of search
-if (hrefParams.get("start") === null) {
+if (hrefParams !== undefined && hrefParams.get("start") !== undefined) {
+    console.log("Hello");
     let searchQueryEncoded = hrefParams.get("q");
     let searchQuery = decodeURI(searchQueryEncoded);
 
@@ -20,3 +22,4 @@ if (hrefParams.get("start") === null) {
 
     browser.runtime.sendMessage(message);
 }
+
