@@ -1,6 +1,6 @@
 browser.browserAction.onClicked.addListener(openMyPage);
 
-browser.runtime.onMessage.addListener(onMessage);
+// browser.runtime.onMessage.addListener(onMessage);
 
 function openMyPage() {
     browser.tabs.create({
@@ -15,7 +15,34 @@ function onMessage(message) {
         case "searchQuery":
             processSearchQuery(message);
             break;
+            case "clipboardEvent":
+            processClipboardEvent(message);
+            break;
     }
+}
+
+function processClipboardEvent(message) {
+    delete message.type;
+    
+    let stackoverflowClipboardHistory = browser.storage.local.get("stackoverflowClipboardHistory");
+    stackoverflowClipboardHistory.then(function (items) {
+        let records = items.stackoverflowClipboardHistory;
+        if (records === undefined) {
+            records = [];
+        }
+        records.push(message);
+
+        let dbRecord = {
+            "stackoverflowClipboardHistory": records
+        };
+
+        browser.storage.local.set(dbRecord).catch(function (error) {
+            console.log("Error while setting local storage data (stackoverflowClipboardHistory), " + error);
+        });
+        }
+        , function (error) {
+            console.log("Error while getting local storage data (stackoverflowClipboardHistory), " + error);
+        })
 }
 
 /**

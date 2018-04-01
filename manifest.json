@@ -19,7 +19,7 @@
   },
 
   "background": {
-    "scripts": ["messageDispatcher.js"]
+    "scripts": ["messageDispatcher.js", "tabsWatcher.js"]
   },
 
   "content_scripts": [
@@ -29,6 +29,14 @@
       ],
       "matches": [
         "*://*.google.ru/*"
+      ]
+    },
+    {
+      "js": [
+        "stackOverflowSelectionHandler.js"
+      ],
+      "matches": [
+        "*://*.stackoverflow.com/*"
       ]
     }
   ],
