@@ -1,6 +1,5 @@
 browser.browserAction.onClicked.addListener(openMyPage);
-
-// browser.runtime.onMessage.addListener(onMessage);
+browser.runtime.onMessage.addListener(onMessage);
 
 function openMyPage() {
     browser.tabs.create({
