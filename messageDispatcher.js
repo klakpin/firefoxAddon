@@ -5,7 +5,7 @@ browser.runtime.onMessage.addListener(onMessage);
 
 function openMyPage() {
     browser.tabs.create({
-        "url": "homepage/innoMetricsIndex.html"
+        "url": "homepage/index.html"
     });
 }
 
@@ -15,7 +15,7 @@ function onMessage(message) {
         case "searchQuery":
             processSearchQuery(message);
             break;
-            case "clipboardEvent":
+        case "clipboardEvent":
             processClipboardEvent(message);
             break;
     }
@@ -26,30 +26,30 @@ function onMessage(message) {
  * @param message - information about search query
  */
 function processClipboardEvent(message) {
-  if (DEBUG) {
+    if (DEBUG) {
         console.log("Processing clipboardEvent: " + message.selection);
-  }
+    }
 
     delete message.type;
 
-    let stackoverflowClipboardHistory = browser.storage.local.get("stackoverflowClipboardHistory");
+    let stackoverflowClipboardHistory = browser.storage.local.get("clipboardEvent");
     stackoverflowClipboardHistory.then(function (items) {
-        let records = items.stackoverflowClipboardHistory;
-        if (records === undefined) {
-            records = [];
-        }
-        records.push(message);
+            let records = items.stackoverflowClipboardHistory;
+            if (records === undefined) {
+                records = [];
+            }
+            records.push(message);
 
-        let dbRecord = {
-            "stackoverflowClipboardHistory": records
-        };
+            let dbRecord = {
+                "clipboardEvent": records
+            };
 
-        browser.storage.local.set(dbRecord).catch(function (error) {
-            console.log("Error while setting local storage data (stackoverflowClipboardHistory), " + error);
-        });
+            browser.storage.local.set(dbRecord).catch(function (error) {
+                console.log("Error while setting local storage data (clipboardEvent), " + error);
+            });
         }
         , function (error) {
-            console.log("Error while getting local storage data (stackoverflowClipboardHistory), " + error);
+            console.log("Error while getting local storage data (clipboardEvent), " + error);
         })
 }
 
@@ -59,9 +59,9 @@ function processClipboardEvent(message) {
  */
 function processSearchQuery(message) {
 
-  if (DEBUG) {
+    if (DEBUG) {
         console.log("Processing search query: " + message);
-  }
+    }
     delete message.type;
     let queries = browser.storage.local.get("searchQueries");
 
