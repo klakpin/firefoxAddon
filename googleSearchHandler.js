@@ -1,9 +1,6 @@
 /**
  * Reads value of search query and send it to background script.
  */
-
-console.log("Hi");
-
 let hrefParams = (new URL(document.location)).searchParams;
 
 // Search page is new, i.e. user did not went to page 2 of search
@@ -22,4 +19,3 @@ if (hrefParams !== undefined && hrefParams.get("start") !== undefined) {
 
     browser.runtime.sendMessage(message);
 }
-

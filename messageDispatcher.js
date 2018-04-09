@@ -1,12 +1,13 @@
+DEBUG = true;
+
 browser.browserAction.onClicked.addListener(openMyPage);
 browser.runtime.onMessage.addListener(onMessage);
 
 function openMyPage() {
     browser.tabs.create({
-        "url": "/innoMetricsIndex.html"
+        "url": "homepage/innoMetricsIndex.html"
     });
 }
-
 
 function onMessage(message) {
     console.log("New message: " + message.type);
@@ -20,9 +21,17 @@ function onMessage(message) {
     }
 }
 
+/**
+ * Receive message about new stackoverflow selection and proceed it.
+ * @param message - information about search query
+ */
 function processClipboardEvent(message) {
+  if (DEBUG) {
+        console.log("Processing clipboardEvent: " + message.selection);
+  }
+
     delete message.type;
-    
+
     let stackoverflowClipboardHistory = browser.storage.local.get("stackoverflowClipboardHistory");
     stackoverflowClipboardHistory.then(function (items) {
         let records = items.stackoverflowClipboardHistory;
@@ -49,6 +58,10 @@ function processClipboardEvent(message) {
  * @param message - information about search query
  */
 function processSearchQuery(message) {
+
+  if (DEBUG) {
+        console.log("Processing search query: " + message);
+  }
     delete message.type;
     let queries = browser.storage.local.get("searchQueries");
 
@@ -71,4 +84,3 @@ function processSearchQuery(message) {
             console.log("Error while getting local storage data (searchQueries), " + error);
         })
 }
-
