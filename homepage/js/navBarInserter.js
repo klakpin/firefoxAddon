@@ -1,11 +1,6 @@
 let navBarDiv = document.getElementById("navBar");
 let navBarClasses = navBarDiv.classList;
 
-let p1 = "<li class=\"nav-item\">\n";
-let p2 = "</li>\n";
-let mid = "<a class=\"nav-link\" href=\"#\"></a>";
-let midActive = "<a class=\"nav-link active\" href=\"#\"></a>";
-
 //You can add more pages here
 let pages = [
     {"id": "index", "title": "Home", "link": "/homepage/index.html"},
@@ -15,7 +10,7 @@ let pages = [
 
 let html = "";
 
-html += "<ul class=\"nav nav-pills\">";
+// html += "<ul class=\"nav nav-pills\">";
 
 pages.forEach(function (element) {
     let mid = false;
@@ -34,6 +29,6 @@ pages.forEach(function (element) {
 
 });
 
-html += "</ul>";
+// html += "</ul>";
 
 navBarDiv.innerHTML = html;

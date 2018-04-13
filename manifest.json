@@ -7,21 +7,20 @@
   "icons": {
     "48": "icons/page-48.png"
   },
-
   "applications": {
     "gecko": {
       "strict_min_version": "54.0a1"
     }
-
   },
   "browser_action": {
     "default_icon": "icons/page-32.png"
   },
-
   "background": {
-    "scripts": ["messageDispatcher.js", "tabsWatcher.js"]
+    "scripts": [
+      "messageDispatcher.js",
+      "tabsWatcher.js"
+    ]
   },
-
   "content_scripts": [
     {
       "js": [
@@ -40,7 +39,6 @@
       ]
     }
   ],
-
   "permissions": [
     "storage"
   ]

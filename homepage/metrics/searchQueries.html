@@ -6,13 +6,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Seach queries statistics</title>
+
+    <link rel="stylesheet" type="text/css" href="/homepage/css/globalStyle.css">
+
 </head>
 
 <body>
-<div id="navBar" class="googleSearchQueries"></div>
-Search history:
-<br/>
-<div id="searchHistory"></div>
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">InnoMetrics</a>
+            <ul id="navBar" class="nav nav-pills googleSearchQueries">
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid metrics-results-container">
+    <div class="alert alert-info" role="alert">
+        Search history:
+    </div>
+    <div id="searchHistory"></div>
+</div>
 </body>
 
 <script src="/homepage/js/searchQueriesFiller.js"></script>

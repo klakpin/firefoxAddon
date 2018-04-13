@@ -8,15 +8,17 @@ function sendMessage(selectionText) {
     message.time = `${currentDate.getUTCHours()}-${currentDate.getUTCMinutes()}-${currentDate.getUTCSeconds()}`;
 
     console.log("Sending message: " + message.selection);
-    var sending = browser.runtime.sendMessage(message);
+
+    // noinspection JSUnresolvedFunction
+    let sending = browser.runtime.sendMessage(message);
     sending.catch(function (error) {
         console.log("Error");
-        obj = JSON.parse(JSON.stringify(error));
+        let obj = JSON.parse(JSON.stringify(error));
         console.log(obj);
     });
 }
 
-document.addEventListener('copy', function (element) {
+document.addEventListener('copy', function () {
     let clipboardText = document.getSelection();
     console.log("ClipText: " + clipboardText);
     sendMessage(clipboardText);

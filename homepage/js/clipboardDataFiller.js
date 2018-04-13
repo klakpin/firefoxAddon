@@ -11,7 +11,7 @@ browser.storage.local.get("clipboardEvent").then(function (item) {
 
 function onSearchQueriesFound() {
     if (clipboardHistory.hasOwnProperty("clipboardEvent")) {
-        clipboardHistoryDiv.innerHTML = convertToTable(clipboardHistory.clipboardEvent);;
+        clipboardHistoryDiv.innerHTML = convertToTable(clipboardHistory.clipboardEvent);
     } else {
         clipboardHistoryDiv.innerHTML = "Nothing yet.";
     }

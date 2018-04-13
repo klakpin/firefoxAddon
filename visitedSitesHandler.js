@@ -1,2 +1,2 @@
-let currentUrl =new URL(document.location);
+// let currentUrl =new URL(document.location);
 
