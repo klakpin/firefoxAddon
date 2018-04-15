@@ -49,6 +49,7 @@ function deleteRecord(message, sendResponce) {
             items[message].forEach(function (item) {
                 if (item.hash === message.hash) {
                     //TODO make deletion of record
+                    //https://bugzilla.mozilla.org/show_bug.cgi?id=1267027
                 }
             });
         }
@@ -131,10 +132,11 @@ function processSearchQuery(message) {
 }
 
 function hashCode(str) {
-    len = str.length;
+    let len = str.length;
 
-    hash = 0;
-    for (i = 1; i <= len; i++) {
+    let hash = 0;
+    let char;
+    for (let i = 1; i <= len; i++) {
         char = str.charCodeAt((i - 1));
         hash += char * Math.pow(31, (len - i));
         hash = hash & hash; //javascript limitation to force to 32 bits

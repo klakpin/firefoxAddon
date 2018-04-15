@@ -14,7 +14,7 @@ function convertToTable(data) {
         resultText += `<th>${element.toString()}</th>`;
     });
 
-    resultText += "<th>Delete record</th>";
+    // resultText += "<th>Delete record</th>";
 
     resultText += "    </tr>" +
         "    </thead>\n" +
@@ -26,7 +26,8 @@ function convertToTable(data) {
         values.forEach(function (element) {
             resultText += `        <td>${element.toString()}</td>`;
         });
-        resultText += `<td><a class="badge badge-danger" onclick="sendDeletionRequest(${type}, ${element.hash})">delete</a></td>`;
+        //Don't work due to Mozilla bug https://bugzilla.mozilla.org/show_bug.cgi?id=1267027
+        // resultText += `<td><span class="badge badge-danger" onclick="function (){sendDeletionRequest(${type}, ${element.hash})}">delete</span></td>`;
         resultText += "    </tr>";
     });
 
@@ -35,21 +36,24 @@ function convertToTable(data) {
     return resultText;
 }
 
-function sendDeletionRequest(type, hash) {
-    console.log("Sending deletion request");
-
-    let message = {
-        "type": type,
-        "hash": hash
-    };
-
-    let sending = browser.runtime.sendMessage(message);
-    sending.then(function (result) {
-        if (result.status === "ok") {
-            location.reload();
-        }
-    }, function (error) {
-        alert("Deletion unsuccessful " + error.toString())
-    });
-}
+/*
+https://bugzilla.mozilla.org/show_bug.cgi?id=1267027
+ */
+// function sendDeletionRequest(type, hash) {
+//     console.log("Sending deletion request");
+//
+//     let message = {
+//         "type": type,
+//         "hash": hash
+//     };
+//
+//     let sending = browser.runtime.sendMessage(message);
+//     sending.then(function (result) {
+//         if (result.status === "ok") {
+//             location.reload();
+//         }
+//     }, function (error) {
+//         alert("Deletion unsuccessful " + error.toString())
+//     });
+// }
 
