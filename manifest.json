@@ -32,10 +32,18 @@
     },
     {
       "js": [
-        "stackOverflowSelectionHandler.js"
+        "selectionHandler.js"
       ],
       "matches": [
         "*://*.stackoverflow.com/*"
+      ]
+    },
+    {
+      "js": [
+        "visitedSitesHandler.js"
+      ],
+      "matches": [
+        "<all_urls>"
       ]
     }
   ],

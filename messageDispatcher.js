@@ -27,6 +27,9 @@ function onMessage(message, sender, sendResponce) {
         case "clipboardEvent":
             processClipboardEvent(message, sendResponce);
             break;
+        case "visitedSites":
+            processVisitedSite(message);
+            break;
         case "deleteRecord":
             deleteRecord(message);
             break;
@@ -58,13 +61,41 @@ function deleteRecord(message, sendResponce) {
         });
 }
 
+function processVisitedSite(message) {
+    if (DEBUG) {
+        console.log("Processing visitedSites Site " + message.href);
+    }
+
+    delete message.type;
+    message.hash = hashCode(message.date + message.type);
+
+    let sites = browser.storage.local.get("visitedSites");
+    sites.then(function (items) {
+            let records = items.visitedSites;
+            if (records === undefined) {
+                records = [];
+            }
+            records.push(message);
+
+            let dbRecord = {
+                "visitedSites": records
+            };
+
+
+            browser.storage.local.set(dbRecord).catch(function (error) {
+                console.log("Error while setting local storage data (visitedSites), " + error);
+            });
+        }
+        , function (error) {
+            console.log("Error while getting local storage data (visitedSites), " + error);
+        })
+}
+
 /**
  * Receive message about new stackoverflow selection and proceed it.
  * @param message - JSON with information about search query
  */
 function processClipboardEvent(message) {
-
-
     if (DEBUG) {
         console.log("Processing clipboardEvent: " + message.selection);
     }

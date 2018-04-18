@@ -5,7 +5,8 @@ let navBarClasses = navBarDiv.classList;
 let pages = [
     {"id": "index", "title": "Home", "link": "/homepage/index.html"},
     {"id": "googleSearchQueries", "title": "Google search queries", "link": "/homepage/metrics/searchQueries.html"},
-    {"id": "clipboardQueries", "title": "Clipboard savings history", "link": "/homepage/metrics/clipboardData.html"}
+    {"id": "clipboardQueries", "title": "Clipboard savings history", "link": "/homepage/metrics/clipboardData.html"},
+    {"id": "visitedSites", "title": "Visited sites history", "link": "/homepage/metrics/visitedSites.html"}
 ];
 
 let html = "";

@@ -11,7 +11,6 @@ browser.storage.local.get("searchQueries").then(function (item) {
 
 function onSearchQueriesFound() {
     if (searchQueries.hasOwnProperty("searchQueries")) {
-        console.log(JSON.stringify(searchQueries));
         searchHistoryDiv.innerHTML = convertToTable(searchQueries.searchQueries);
     } else {
         searchHistoryDiv.innerHTML = "Nothing yet.";
